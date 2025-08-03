@@ -5,7 +5,9 @@ const client=new PrismaClient();
 export async  function POST(req:NextRequest){
     //extract the body 
     const body=await req.json();
-    await client.user.create({
+
+    try{
+        await client.user.create({
         data:{
             username:body.username,
             password:body.password,
@@ -16,5 +18,26 @@ export async  function POST(req:NextRequest){
 
     return Response.json({
         message:"You are Logged in"
+    },{
+        status:411
+    })
+
+    }
+    catch(e){
+        return Response.json({
+            message:"Error While Signup"
+        })
+
+    }
+    
+}
+
+export async function GET(req:NextRequest){
+    const user = await client.user.findFirst();
+
+    return Response.json({
+        email:user?.email,
+        password:user?.password,
+        username:user?.username
     })
 }

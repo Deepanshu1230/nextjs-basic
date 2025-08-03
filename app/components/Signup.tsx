@@ -52,7 +52,7 @@ export default function(){
                         password,
                         email
                     })
-                    router.push("/");
+                    // router.push("/");
                 }} className="bg-blue-500 text-white font-semibold rounded-2xl px-4 py-2 mt-4 text-center w-[200px] ">Signup</button>
             </div>
 
