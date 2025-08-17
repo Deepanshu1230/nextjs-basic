@@ -1,43 +1,31 @@
 import { NextRequest } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import client from "@/db";
 
-const client=new PrismaClient();
+
 export async  function POST(req:NextRequest){
-    //extract the body 
-    const body=await req.json();
 
-    try{
-        await client.user.create({
-        data:{
-            username:body.username,
-            password:body.password,
-            email:body.email
-        }
-    })
-    console.log(body);
+}
 
-    return Response.json({
-        message:"You are Logged in"
-    },{
-        status:411
-    })
+// export async function GET(req:NextRequest){
+   
 
-    }
-    catch(e){
-        return Response.json({
-            message:"Error While Signup"
-        })
+//     try{
+//         const user =await client.user.findFirst();
+//         return Response.json({
+//         email:user?.email,
+//         password:user?.password,
+//         username:user?.username
+//     })
 
-    }
+//     }
+//     catch(e){
+//         console.log(e);
+//         return Response.json({
+//             message:"There is Problem in Parsing"
+            
+//         })
+
+//     }
+
     
-}
-
-export async function GET(req:NextRequest){
-    const user = await client.user.findFirst();
-
-    return Response.json({
-        email:user?.email,
-        password:user?.password,
-        username:user?.username
-    })
-}
+// }

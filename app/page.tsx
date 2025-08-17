@@ -1,9 +1,16 @@
 import axios from "axios";
+import { NextRequest } from "next/server";
+import client from "@/db";
+
+
 
 async function fetchdata() {
-  const response = await axios.get("http://localhost:3000/api/user");
-  console.log("Response : ", JSON.stringify(response.data));
-  return response.data;
+   const user =await client.user.findFirst();
+        return {
+        email:user?.email,
+        password:user?.password,
+        username:user?.username
+    }
 }
 export default async function Home() {
   const data = await fetchdata();
